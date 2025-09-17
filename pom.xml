@@ -22,9 +22,9 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.bit.velocity</groupId>
+        <groupId>com.github.nitinkc</groupId>
         <artifactId>bv-core-platform-bom</artifactId>
-        <version>1.0.0</version>
+        <version>Release-1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
