@@ -242,7 +242,10 @@
       <name>GitHub Packages</name>
       <url>https://maven.pkg.github.com/nitinkc/bv-core-parent</url>
     </snapshotRepository>
+  <repository>
+    <id>jitpack.io</id>
+    <name>JitPack</name>
+    <url>https://jitpack.io</url>
+  </repository>
   </distributionManagement>
-
-
 </project>
