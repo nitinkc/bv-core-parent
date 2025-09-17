@@ -231,4 +231,11 @@
 
   <!-- Specifies where your built artifacts (like your parent POM) should be published when you run mvn deploy. 
   This is for publishing, not for fetching dependencies. For JitPack this is not needed, its used for github releases -->
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/nitinkc/bv-core-parent</url>
+    </repository>
+  </distributionManagement>
 </project>
