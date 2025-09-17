@@ -18,15 +18,15 @@
   </repositories>
 
   <!-- Specifies where your built artifacts (like your parent POM) should be published when you run mvn deploy. 
-  This is for publishing, not for fetching dependencies. For JitPack this is not needed -->
-  <!-- <distributionManagement>
+  This is for publishing, not for fetching dependencies. For JitPack this is not needed, its used for github releases -->
+  <distributionManagement>
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>
       <url>https://maven.pkg.github.com/nitinkc/Core-BOM</url>
     </repository>
   </distributionManagement>
-   -->
+  
 
   <!--  Get Dependencies from platform BOM. Add required Plugins here-->
   <!--  Used in parent POMs to define versions of dependencies for child projects, so they inherit consistent versions. -->
