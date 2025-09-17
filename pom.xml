@@ -23,7 +23,7 @@
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/nitinkc/Core-BOM</url>
+      <url>https://maven.pkg.github.com/nitinkc/bv-core-parent</url>
     </repository>
   </distributionManagement>
   
