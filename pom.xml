@@ -3,8 +3,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.nitinkc</groupId>
-  <artifactId>bit-velocity-parent</artifactId>
+  <groupId>com.bit.velocity</groupId>
+  <artifactId>bv-core-parent</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>BitVelocity Parent</name>
