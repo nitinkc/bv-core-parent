@@ -29,6 +29,7 @@ jobs:
           message: 'ci: bump version [skip ci]'
 
   build:
+    needs: bump-version # Ensure version is bumped before building
     runs-on: ubuntu-latest
     permissions:
       contents: read
