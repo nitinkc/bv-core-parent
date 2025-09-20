@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bit.velocity</groupId>
   <artifactId>bv-core-parent</artifactId>
-  <version>0.0.5</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>BitVelocity Parent</name>
 
