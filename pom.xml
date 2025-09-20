@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bit.velocity</groupId>
   <artifactId>bv-core-parent</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.5</version>
   <packaging>pom</packaging>
   <name>BitVelocity Parent</name>
 
@@ -55,6 +55,8 @@
     <sonar.junit.reportPaths>target/test-results</sonar.junit.reportPaths>
     <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+    <spring-boot.version>3.5.6</spring-boot.version>
+    <maven-compiler-plugin-lombok.version>1.18.32</maven-compiler-plugin-lombok.version>
   </properties>
 
   <build>
@@ -70,10 +72,12 @@
             <path>
               <groupId>org.projectlombok</groupId>
               <artifactId>lombok</artifactId>
+              <version>${maven-compiler-plugin-lombok.version}</version>
             </path>
             <path>
               <groupId>org.springframework.boot</groupId>
               <artifactId>spring-boot-configuration-processor</artifactId>
+              <version>${spring-boot.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>
