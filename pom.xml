@@ -24,7 +24,7 @@
       <dependency>
         <groupId>com.github.nitinkc</groupId>
         <artifactId>bv-core-platform-bom</artifactId>
-        <version>release-01.1	</version>
+        <version>release-01.2</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -66,8 +66,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven.compiler.plugin.version}</version>
         <configuration>
-          <source>25</source>
-          <target>25</target>
+          <source>21</source>
+          <target>21</target>
           <annotationProcessorPaths>
             <path>
               <groupId>org.projectlombok</groupId>
