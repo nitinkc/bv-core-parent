@@ -9,14 +9,6 @@
   <packaging>pom</packaging>
   <name>BitVelocity Parent</name>
 
-  <!-- repositories Tells Maven where to download dependencies from (for BOM in this case)-->
-  <repositories>
-    <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
-    </repository>
-  </repositories>
-
   <!--  Get Dependencies from platform BOM. Add required Plugins here-->
   <!--  Used in parent POMs to define versions of dependencies for child projects, so they inherit consistent versions. -->
   <dependencyManagement>
@@ -24,7 +16,7 @@
       <dependency>
         <groupId>com.github.nitinkc</groupId>
         <artifactId>bv-core-platform-bom</artifactId>
-        <version>release-01.2</version>
+        <version>1.0.5-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -43,7 +35,6 @@
     <maven.springboot.plugin.version>3.5.5</maven.springboot.plugin.version>
     <spring.boot.version>3.1.2</spring.boot.version>
     <lombok.version>1.18.28</lombok.version>
-    <spotbugs.version>4.9.4</spotbugs.version>
     <dependency.check.maven.plugin.version>12.1.3</dependency.check.maven.plugin.version>
     <git-code-format-maven-plugin.version>5.3</git-code-format-maven-plugin.version>
     <!--    Sonar Cube-->
@@ -61,6 +52,7 @@
 
   <build>
     <plugins>
+      <!-- Java Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -160,31 +152,14 @@
           <!-- config -->
         </configuration>
         <dependencies>
-          <dependency>
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs</artifactId>
-            <version>${spotbugs.version}</version>
-          </dependency>
+          <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs -->
+<!--          <dependency>-->
+<!--            <groupId>com.github.spotbugs</groupId>-->
+<!--            <artifactId>spotbugs</artifactId>-->
+<!--            <version>4.9.6</version>-->
+<!--            <type>pom</type>-->
+<!--          </dependency>-->
         </dependencies>
-      </plugin>
-
-      <!-- Java Compiler Plugin -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven.compiler.plugin.version}</version>
-        <configuration>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-            </path>
-            <path>
-              <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-configuration-processor</artifactId>
-            </path>
-          </annotationProcessorPaths>
-        </configuration>
       </plugin>
 
       <!-- Spring Boot Maven Plugin -->
@@ -262,4 +237,12 @@
       <url>https://maven.pkg.github.com/nitinkc/bv-core-parent</url>
     </repository>
   </distributionManagement>
+
+  <!-- repositories Tells Maven where to download dependencies from (for BOM in this case)-->
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
 </project>
