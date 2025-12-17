@@ -1,25 +1,255 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.bitvelocity</groupId>
-    <artifactId>bv-core-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>../bv-core-common</module>
-    </modules>
-    <dependencyManagement>
-        <dependencies>
-            <!-- Add managed dependencies here -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.2.5</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-</project>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.bit.velocity</groupId>
+  <artifactId>bv-core-parent</artifactId>
+  <version>0.0.13-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>BitVelocity Parent</name>
+
+  <!--  Get Dependencies from platform BOM. Add required Plugins here-->
+  <!--  Used in parent POMs to define versions of dependencies for child projects, so they inherit consistent versions. -->
+  <dependencyManagement>
+    <dependencies>
+<!--      https://jitpack.io/#nitinkc/bv-core-platform-bom/1.0.5-SNAPSHOT-->
+      <dependency>
+        <groupId>com.github.nitinkc</groupId>
+        <artifactId>bv-core-platform-bom</artifactId>
+        <version>1.0.5-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!--  Plugin properties cant be read from properties file -->
+  <properties>
+    <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+    <maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
+    <sonar.maven.plugin.version>5.2.0.4988</sonar.maven.plugin.version>
+    <spotless.maven.plugin.version>2.46.1</spotless.maven.plugin.version>
+    <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
+    <spotbugs.maven.plugin.version>4.9.3.2</spotbugs.maven.plugin.version>
+    <spotbugs.version>4.9.4</spotbugs.version>
+    <maven.springboot.plugin.version>3.5.5</maven.springboot.plugin.version>
+    <spring.boot.version>3.1.2</spring.boot.version>
+    <lombok.version>1.18.28</lombok.version>
+    <dependency.check.maven.plugin.version>12.1.3</dependency.check.maven.plugin.version>
+    <git-code-format-maven-plugin.version>5.3</git-code-format-maven-plugin.version>
+    <!--    Sonar Cube-->
+    <!--    <sonar.host.url>https://sonarqube.host.com</sonar.host.url>-->
+    <!--    <sonar.login>${env.SONAR_TOKEN}</sonar.login>-->
+    <!--    <sonar.projectKey>project:service:_</sonar.projectKey>-->
+    <!--    <sonar.projectName>NameOf Service</sonar.projectName>-->
+    <sonar.java.source>21</sonar.java.source>
+    <sonar.junit.reportPaths>target/test-results</sonar.junit.reportPaths>
+    <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+    <spring-boot.version>3.5.6</spring-boot.version>
+    <maven-compiler-plugin-lombok.version>1.18.32</maven-compiler-plugin-lombok.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- Java Compiler Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.plugin.version}</version>
+        <configuration>
+          <source>21</source>
+          <target>21</target>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${maven-compiler-plugin-lombok.version}</version>
+            </path>
+            <path>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-configuration-processor</artifactId>
+              <version>${spring-boot.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+
+      <!-- Properties Maven Plugin to load external properties -->
+<!--      <plugin>-->
+<!--        <groupId>org.codehaus.mojo</groupId>-->
+<!--        <artifactId>properties-maven-plugin</artifactId>-->
+<!--        <version>1.0.0</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <phase>initialize</phase>-->
+<!--            <goals>-->
+<!--              <goal>read-project-properties</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <files>-->
+<!--                <file>project-properties.properties</file>-->
+<!--              </files>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+
+      <!-- Maven Publish (Deploy) Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>${maven.deploy.plugin.version}</version>
+      </plugin>
+
+      <!-- SonarQube Plugin -->
+      <plugin>
+        <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>${sonar.maven.plugin.version}</version>
+      </plugin>
+
+      <!-- Spotless Maven Plugin -->
+      <!-- Spotless is a general-purpose, multi-language formatter, while spotify-fmt
+          (in the context of google-java-format) is specifically for Java and the Google Java Style.-->
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.maven.plugin.version}</version>
+        <configuration>
+          <!-- configuration here -->
+        </configuration>
+      </plugin>
+
+      <!-- Checkstyle Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven.checkstyle.plugin.version}</version>
+        <configuration>
+          <configLocation>src/main/resources/checkstyle.xml</configLocation>
+          <suppressionsLocation>src/main/resources/suppressions.xml</suppressionsLocation>
+          <suppressionsFileExpression>src/main/resources/suppressions.xml</suppressionsFileExpression>
+          <failsOnError>true</failsOnError>
+          <linkXRef>false</linkXRef>
+        </configuration>
+      </plugin>
+
+      <!-- OWASP Dependency Check Plugin -->
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>12.1.3</version>
+      </plugin>
+
+      <!-- SpotBugs Plugin -->
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${spotbugs.maven.plugin.version}</version>
+        <configuration>
+          <!-- config -->
+        </configuration>
+        <dependencies>
+          <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs -->
+<!--          <dependency>-->
+<!--            <groupId>com.github.spotbugs</groupId>-->
+<!--            <artifactId>spotbugs</artifactId>-->
+<!--            <version>4.9.6</version>-->
+<!--            <type>pom</type>-->
+<!--          </dependency>-->
+        </dependencies>
+      </plugin>
+
+      <!-- Spring Boot Maven Plugin -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${maven.springboot.plugin.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
+      <!-- Git Code Format Maven Plugin -->
+      <!--      TODO: See why its not working with Java 21 -->
+      <!-- https://github.com/Cosium/git-code-format-maven-plugin -->
+<!--      <plugin>-->
+<!--        <groupId>com.cosium.code</groupId>-->
+<!--        <artifactId>git-code-format-maven-plugin</artifactId>-->
+<!--        <version>${git-code-format-maven-plugin.version}</version>-->
+<!--        <executions>-->
+<!--          &lt;!&ndash; On commit, format the modified files &ndash;&gt;-->
+<!--          <execution>-->
+<!--            <id>install-formatter-hook</id>-->
+<!--            <goals>-->
+<!--              <goal>install-hooks</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--          &lt;!&ndash; On Maven verify phase, fail if any file-->
+<!--          (including unmodified) is badly formatted &ndash;&gt;-->
+<!--          <execution>-->
+<!--            <id>validate-code-format</id>-->
+<!--            <goals>-->
+<!--              <goal>validate-code-format</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--        <dependencies>-->
+<!--          &lt;!&ndash; Enable https://github.com/google/google-java-format &ndash;&gt;-->
+<!--          <dependency>-->
+<!--            <groupId>com.cosium.code</groupId>-->
+<!--            <artifactId>google-java-format</artifactId>-->
+<!--            <version>${git-code-format-maven-plugin.version}</version>-->
+<!--          </dependency>-->
+<!--        </dependencies>-->
+<!--        <configuration>-->
+<!--          <formatterOptions>-->
+<!--            &lt;!&ndash; Use AOSP style instead of Google Style (4-space indentation). &ndash;&gt;-->
+<!--            <googleJavaFormat.aosp>false</googleJavaFormat.aosp>-->
+<!--            &lt;!&ndash; Format the javadoc &ndash;&gt;-->
+<!--            <googleJavaFormat.formatJavadoc>true</googleJavaFormat.formatJavadoc>-->
+<!--            &lt;!&ndash; Fix import order and remove any unused imports, but do no other formatting. &ndash;&gt;-->
+<!--            <googleJavaFormat.fixImportsOnly>false</googleJavaFormat.fixImportsOnly>-->
+<!--            &lt;!&ndash; Do not fix the import order. Unused imports will still be removed. &ndash;&gt;-->
+<!--            <googleJavaFormat.skipSortingImports>false</googleJavaFormat.skipSortingImports>-->
+<!--            &lt;!&ndash; Do not remove unused imports. Imports will still be sorted. &ndash;&gt;-->
+<!--            <googleJavaFormat.skipRemovingUnusedImports>false</googleJavaFormat.skipRemovingUnusedImports>-->
+<!--            <aqme.option1>false</aqme.option1>-->
+<!--            <aqme.option2>foo</aqme.option2>-->
+<!--          </formatterOptions>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
+    </plugins>
+  </build>
+
+  <!-- Specifies where your built artifacts (like your parent POM) should be published when you run mvn deploy.
+  This is for publishing, not for fetching dependencies. For JitPack this is not needed, its used for github releases -->
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/nitinkc/bv-core-parent</url>
+    </repository>
+  </distributionManagement>
+
+  <!-- repositories Tells Maven where to download dependencies from (for BOM in this case)-->
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+    <repository>
+    <id>central</id>
+    <name>Maven Central</name>
+    <url>https://repo.maven.apache.org/maven2</url>
+  </repository>
+  </repositories>
+</project>
