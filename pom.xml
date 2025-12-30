@@ -17,7 +17,7 @@
       <dependency>
         <groupId>com.github.nitinkc</groupId>
         <artifactId>bv-core-platform-bom</artifactId>
-        <version>1.0.5-SNAPSHOT</version>
+        <version>1.0.7-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
